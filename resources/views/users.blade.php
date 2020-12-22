@@ -5,15 +5,18 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo $title ?></title>
+    <title>{{ $title }}</title>
 </head>
 <body>
-<h1>Usuarios</h1>
+<h1>{{ $title }}</h1>
 
 <ul>
-    <?php foreach ($users as $user): ?>
-    <li><?php echo e($user) ?></li>
-    <?php endforeach; ?>
+    @forelse($users as $user)
+        <li>{{ $user }}</li>
+    @empty
+        <p>No hay usuarios registrados</p>
+    @endforelse
 </ul>
+
 </body>
 </html>
