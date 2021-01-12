@@ -14,7 +14,7 @@ class UserController extends Controller
             $users = ['Joel', 'Ellie', 'Tess', 'Tommy', 'Bill'];
         }
         $title = 'Listado de usuarios';
-        return view('users')->with(['users' => $users, 'title' => $title]);
+        return view('users.index')->with(['users' => $users, 'title' => $title]);
     }
 
     public function create()
@@ -24,6 +24,6 @@ class UserController extends Controller
 
     public function show($id)
     {
-        return view('users-show', compact('id'));
+        return view('users.show', compact('id'));
     }
 }

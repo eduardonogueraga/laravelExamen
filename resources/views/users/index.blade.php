@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+    Curso Laravel
+@endsection
+
 @section('content')
 <h1>{{ $title }}</h1>
 
@@ -10,4 +14,9 @@
         <p>No hay usuarios registrados</p>
     @endforelse
 </ul>
+@endsection
+
+@section('sidebar')
+    @parent
+    <h2>Barra lateral personalizada</h2>
 @endsection

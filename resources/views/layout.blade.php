@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Sticky Footer Navbar Template · Bootstrap</title>
+    <title>@yield('title', 'Curso')</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
 
@@ -78,7 +78,9 @@
             @yield('content')
         </div>
         <div class="col-4">
-            @include('sidebar')
+            @section('sidebar')
+                <h2>Barra Lateral</h2>
+            @endsection
         </div>
     </div>
 </main>
