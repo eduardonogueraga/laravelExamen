@@ -9,14 +9,9 @@
 
 <ul>
     @forelse($users as $user)
-        <li>{{ $user }}</li>
+        <li>{{ $user->name }} ({{ $user->email }})</li>
     @empty
         <p>No hay usuarios registrados</p>
     @endforelse
 </ul>
-@endsection
-
-@section('sidebar')
-    @parent
-    <h2>Barra lateral personalizada</h2>
 @endsection

@@ -74,13 +74,8 @@
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
     <div class="row pt-5 mt-5 ml-5">
-        <div class="col-8">
+        <div class="col-12">
             @yield('content')
-        </div>
-        <div class="col-4">
-            @section('sidebar')
-                <h2>Barra Lateral</h2>
-            @endsection
         </div>
     </div>
 </main>
