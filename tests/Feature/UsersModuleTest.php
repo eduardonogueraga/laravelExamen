@@ -66,4 +66,20 @@ class UsersModuleTest extends TestCase
             ->assertStatus(404)
             ->assertSee('Página no encontrada');
     }
+
+    /** @test */
+    function it_creates_a_new_user()
+    {
+        $this->post('/usuarios/', [
+            'name' => 'Pepe',
+            'email' => 'pepe@mail.es',
+            'password' => '123456',
+        ])->assertRedirect('/usuarios');
+
+        $this->assertCredentials([
+            'name' => 'Pepe',
+            'email' => 'pepe@mail.es',
+            'password' => '123456',
+        ]);
+    }
 }
