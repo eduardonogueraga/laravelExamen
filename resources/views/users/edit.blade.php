@@ -16,8 +16,9 @@
         </div>
     @endif
 
-    <form method="post" action="{{ route('users.store') }}">
+    <form method="post" action="{{ route('users.update', $user) }}">
         {{ csrf_field() }}
+        {{ method_field('PUT') }}
 
         <label for="name">Nombre:</label>
         <input type="text" name="name" placeholder="Nombre" value="{{ old('name', $user->name) }}">
