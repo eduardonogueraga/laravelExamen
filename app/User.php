@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -35,5 +36,31 @@ class User extends Authenticatable
     public function profession()
     {
         return $this->belongsTo(Profession::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
+    public static function findByEmail($email)
+    {
+        return static::where(compact('email'))->first();
+    }
+
+    public static function createUser($data)
+    {
+        DB::transaction(function () use ($data) {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
+
+            $user->profile()->create([
+                'bio' => $data['bio'],
+                'twitter' => $data['twitter'],
+            ]);
+        });
     }
 }
