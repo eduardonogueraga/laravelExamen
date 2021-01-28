@@ -36,6 +36,15 @@
                 <input type="password" name="password" placeholder="Al menos 6 caracteres" class="form-control">
             </div>
             <div class="form-group">
+                <label for="profession_id">Profesión: </label>
+                <select name="profession_id" id="profession_id" class="form-control">
+                    <option value="">Selecciona una opción</option>
+                    @foreach($professions as $profession)
+                        <option value="{{ $profession->id }}" {{ old('profession_id') == $profession->id ? ' selected' : '' }}>{{ $profession->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="bio">Biografía:</label>
                 <textarea name="bio" placeholder="Biografía" class="form-control">{{ old('bio') }}</textarea>
             </div>
