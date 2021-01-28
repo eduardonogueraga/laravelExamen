@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateUserRequest extends FormRequest
 {
@@ -30,6 +31,7 @@ class CreateUserRequest extends FormRequest
             'password' => 'required',
             'bio' => 'required',
             'twitter' => ['nullable', 'url'],
+            'profession_id' => Rule::exists('professions', 'id')->whereNull('deleted_at'),
         ];
     }
 
