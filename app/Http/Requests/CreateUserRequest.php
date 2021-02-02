@@ -35,6 +35,10 @@ class CreateUserRequest extends FormRequest
                 'nullable', 'present',
                 Rule::exists('professions', 'id')->whereNull('deleted_at')
             ],
+            'skills' => [
+                'array',
+                Rule::exists('skills', 'id')
+                ],
         ];
     }
 
