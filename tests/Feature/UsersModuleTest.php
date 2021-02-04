@@ -27,6 +27,7 @@ class UsersModuleTest extends TestCase
             'profession_id' => $this->profession->id,
             'bio' => 'Programador de Laravel y Vue.js',
             'twitter' => 'https://twitter.com/pepe',
+            'role' => 'user',
         ], $custom);
     }
 
@@ -98,6 +99,7 @@ class UsersModuleTest extends TestCase
     /** @test */
     function it_creates_a_new_user()
     {
+        $this->withoutExceptionHandling();
         $skillA = factory(Skill::class)->create();
         $skillB = factory(Skill::class)->create();
         $skillC = factory(Skill::class)->create();
@@ -110,6 +112,7 @@ class UsersModuleTest extends TestCase
             'name' => 'Pepe',
             'email' => 'pepe@mail.es',
             'password' => '123456',
+            'role' => 'user',
         ]);
 
         $user = User::findByEmail('pepe@mail.es');
@@ -288,6 +291,30 @@ class UsersModuleTest extends TestCase
                 'skills' => [$skillA->id, $skillB->id+1],
             ]))->assertRedirect('usuarios/nuevo')
             ->assertSessionHasErrors(['skills']);
+
+        $this->assertDatabaseEmpty('users');
+    }
+
+    /** @test */
+    function the_role_field_is_optional()
+    {
+        $this->post('/usuarios/', $this->getValidData([
+                'role' => null,
+            ]))->assertRedirect('usuarios');
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'pepe@mail.es',
+            'role' => 'user',
+        ]);
+    }
+
+    /** @test */
+    function the_role_field_must_be_valid()
+    {
+        $this->from('usuarios/nuevo')
+            ->post('/usuarios/', $this->getValidData([
+                'role' => 'role-invalid',
+            ]))->assertSessionHasErrors('role');
 
         $this->assertDatabaseEmpty('users');
     }
