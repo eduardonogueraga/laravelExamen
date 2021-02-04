@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return 'Hola Mundo !!!';
+    return view('welcome');
 });
 
 Route::get('/usuarios', 'UserController@index')->name('users.index');
