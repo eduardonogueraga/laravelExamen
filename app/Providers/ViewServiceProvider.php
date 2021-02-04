@@ -3,26 +3,26 @@
 namespace App\Providers;
 
 use App\Http\ViewComposers\UserFieldComposer;
-use App\Profession;
-use App\Skill;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class ViewServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        //
+        Blade::component('shared._card', 'card');
+
+        View::composer(['users.create', 'users.edit'], UserFieldComposer::class);
     }
 
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
