@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Role;
+use App\{Role, User};
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -46,7 +46,7 @@ class UpdateUserRequest extends FormRequest
         ];
     }
 
-    public function updateUser(User$user)
+    public function updateUser(User $user)
     {
         $data = $this->validated();
 
