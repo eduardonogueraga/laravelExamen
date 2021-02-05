@@ -22,9 +22,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $user = new User;
-
-        return view('users.create', compact('user'));
+        return $this->form('users.create', new User);
     }
 
     public function store(CreateUserRequest $request)
@@ -41,7 +39,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        return $this->form('users.edit', $user);
     }
 
     public function update(User $user)
@@ -68,5 +66,18 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index');
+    }
+
+    /**
+     * @return array
+     */
+    public function form($view, User $user)
+    {
+        return view($view, [
+            'professions' => Profession::orderBy('title', 'ASC')->get(),
+            'skills' => Skill::orderBy('name', 'ASC')->get(),
+            'roles' => trans('users.roles'),
+            'user' => $user,
+        ]);
     }
 }
