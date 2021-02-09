@@ -20,10 +20,6 @@
             <input type="email" name="email" placeholder="Correo electrónico" value="{{ old('email', $user->email) }}" class="form-control">
         </div>
         <div class="form-group">
-            <label for="password">Contraseña:</label>
-            <input type="password" name="password" placeholder="Al menos 6 caracteres" class="form-control">
-        </div>
-        <div class="form-group">
             <label for="bio">Biografía:</label>
             <textarea name="bio" placeholder="Biografía" class="form-control">{{ old('bio', $user->profile->bio) }}</textarea>
         </div>
@@ -40,7 +36,10 @@
             <label for="twitter">Twitter:</label>
             <input type="text" name="twitter" placeholder="Twitter" value="{{ old('twitter', $user->profile->twitter) }}" class="form-control">
         </div>
-
+        <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary">Editar Perfil</button>
+            <a href="{{ route('users.show', $user->id) }}" class="btn btn-link">Regresar al listado de usuarios</a>
+        </div>
     </form>
     @endcard
 @endsection
