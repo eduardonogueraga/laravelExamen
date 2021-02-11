@@ -57,6 +57,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('users.index') }}">Usuarios <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('professions.index') }}">Profesiones <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('skills.index') }}">Habilidades <span class="sr-only">(current)</span></a>
+                </li>
             </ul>
         </div>
     </nav>
