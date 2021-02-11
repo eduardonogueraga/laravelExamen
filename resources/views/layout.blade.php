@@ -42,6 +42,7 @@
         }
     </style>
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">
@@ -81,7 +82,7 @@
 
 <footer class="footer mt-auto py-3">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Curso de Laravel desde 0 para 2DAW 2020-2021</span>
     </div>
 </footer>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
