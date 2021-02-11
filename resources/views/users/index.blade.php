@@ -29,12 +29,19 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td class="form-inline">
+                @if($user->trashed())
+                    <form action="{{ route('users.destroy', $user) }}" method="post">
+                        @csrf @method('delete')
+                        <button type="submit" class="btn btn-link"><span class="oi oi-circle-x"></span></button>
+                    </form>
+                @else
                     <a href="{{ route('users.show', $user) }}" class="btn btn-link"><span class="oi oi-eye"></span></a>
                     <a href="{{ route('users.edit', $user) }}" class="btn btn-link"><span class="oi oi-pencil"></span></a>
-                    <form action="{{ route('users.destroy', $user) }}" method="post">
-                        {{ csrf_field() }} {{ method_field('delete') }}
+                    <form action="{{ route('users.trash', $user) }}" method="post">
+                        @csrf @method('patch')
                         <button type="submit" class="btn btn-link"><span class="oi oi-trash"></span></button>
                     </form>
+                @endif
                 </td>
             </tr>
         @endforeach
