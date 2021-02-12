@@ -21,11 +21,6 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
-    public function profession()
-    {
-        return $this->belongsTo(Profession::class);
-    }
-
     public function profile()
     {
         return $this->hasOne(UserProfile::class)->withDefault();
