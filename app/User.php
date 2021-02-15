@@ -17,6 +17,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'active' => 'bool',
+    ];
+
     public function isAdmin()
     {
         return $this->role === 'admin';
@@ -58,5 +62,15 @@ class User extends Authenticatable
             ->orWhereHas('team', function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%");
             });
+    }
+
+    public function scopeByState($query, $state)
+    {
+        if ($state == 'active') {
+            return $query->where('active', true);
+        }
+        if ($state == 'inactive') {
+            return $query->where('active', false);
+        }
     }
 }
