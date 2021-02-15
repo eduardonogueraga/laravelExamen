@@ -46,6 +46,18 @@ class User extends Authenticatable
         return static::where(compact('email'))->first();
     }
 
+    public function setStateAttribute($value)
+    {
+        $this->attributes['active'] = ($value == 'active');
+    }
+
+    public function getStateAttribute()
+    {
+        if ($this->active !== null) {
+            return $this->active ? 'active' : 'inactive';
+        }
+    }
+
     public function getNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";

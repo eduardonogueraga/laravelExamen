@@ -23,6 +23,7 @@ class UpdateUsersTest extends TestCase
         'bio' => 'Programador de Laravel y Vue.js',
         'twitter' => 'https://twitter.com/pepe',
         'role' => 'user',
+        'state' => 'active',
     ];
 
     /** @test */
@@ -60,6 +61,7 @@ class UpdateUsersTest extends TestCase
             'role' => 'admin',
             'profession_id' => $newProfession->id,
             'skills' => [$newSkill1->id, $newSkill2->id],
+            'state' => 'inactive',
         ]))->assertRedirect('/usuarios/'.$user->id);
 
         $this->assertCredentials([
@@ -67,7 +69,8 @@ class UpdateUsersTest extends TestCase
             'last_name' => 'Pérez',
             'email' => 'pepe@mail.es',
             'password' => '123456',
-            'role' => 'admin'
+            'role' => 'admin',
+            'active' => false,
         ]);
 
         $this->assertDatabaseHas('user_profiles', [
@@ -227,5 +230,37 @@ class UpdateUsersTest extends TestCase
             'email' => 'pepe@mail.es',
             'password' => $oldPassword
         ]);
+    }
+
+    /** @test */
+    function the_state_is_required()
+    {
+        $this->handleValidationExceptions();
+
+        $user = factory(User::class)->create();
+
+        $this->from('/usuarios/'.$user->id.'/editar')
+            ->put('/usuarios/'. $user->id, $this->withData([
+                'state' => '',
+            ]))->assertRedirect('/usuarios/'.$user->id.'/editar')
+            ->assertSessionHasErrors(['state']);
+
+        $this->assertDatabaseMissing('users', ['first_name' => 'Pepe']);
+    }
+
+    /** @test */
+    function the_state_must_be_valid()
+    {
+        $this->handleValidationExceptions();
+
+        $user = factory(User::class)->create();
+
+        $this->from('/usuarios/'.$user->id.'/editar')
+            ->put('/usuarios/'. $user->id, $this->withData([
+                'state' => 'invalid-state',
+            ]))->assertRedirect('/usuarios/'.$user->id.'/editar')
+            ->assertSessionHasErrors(['state']);
+
+        $this->assertDatabaseMissing('users', ['first_name' => 'Pepe']);
     }
 }
