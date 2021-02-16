@@ -8,7 +8,6 @@ use App\Profession;
 use App\Skill;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -24,31 +23,27 @@ class UserController extends Controller
                 }
             })
             ->byState(request('state'))
+            ->byRole(request('role'))
             ->search(request('search'))
             ->orderBy('created_at', 'DESC')
             ->paginate();
 
         $users->appends(request(['search', 'team']));
 
-        $title = 'Listado de usuarios';
-
         return view('users.index', [
             'users' => $users,
-            'title' => $title,
-            'roles' => trans('users.filters.roles'),
+            'view' => 'index',
             'skills' => Skill::orderBy('name')->get(),
-            'states' => trans('users.filters.states'),
             'checkedSkills' => collect(request('skills')),
         ]);
     }
 
     public function trashed()
     {
-        $users = User::onlyTrashed()->paginate();
-
-        $title = 'Listado de usuarios en la papelera';
-
-        return view('users.index', compact('users', 'title'));
+        return view('users.index', [
+            'users' => User::onlyTrashed()->paginate(),
+            'view' => 'trash',
+        ]);
     }
 
     public function create()
@@ -105,7 +100,6 @@ class UserController extends Controller
         return view($view, [
             'professions' => Profession::orderBy('title', 'ASC')->get(),
             'skills' => Skill::orderBy('name', 'ASC')->get(),
-            'roles' => trans('users.roles'),
             'user' => $user,
         ]);
     }
