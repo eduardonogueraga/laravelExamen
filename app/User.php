@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,6 +21,17 @@ class User extends Authenticatable
     protected $casts = [
         'active' => 'bool',
     ];
+
+    /**
+     * Create a new Eloquent query builder for the model.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function newEloquentBuilder($query)
+    {
+        return new UserQuery($query);
+    }
 
     public function isAdmin()
     {
@@ -41,11 +53,6 @@ class User extends Authenticatable
         return $this->belongsTo(Team::class)->withDefault();
     }
 
-    public static function findByEmail($email)
-    {
-        return static::where(compact('email'))->first();
-    }
-
     public function setStateAttribute($value)
     {
         $this->attributes['active'] = ($value == 'active');
@@ -61,35 +68,5 @@ class User extends Authenticatable
     public function getNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
-    }
-
-    public function scopeSearch($query, $search)
-    {
-        if (empty($search)) {
-            return;
-        }
-
-        $query->whereRaw('CONCAT(first_name, " ", last_name) like ?', "%$search%")
-            ->orWhere('email', 'like', "%$search%")
-            ->orWhereHas('team', function ($query) use ($search) {
-                $query->where('name', 'like', "%{$search}%");
-            });
-    }
-
-    public function scopeByState($query, $state)
-    {
-        if ($state == 'active') {
-            return $query->where('active', true);
-        }
-        if ($state == 'inactive') {
-            return $query->where('active', false);
-        }
-    }
-
-    public function scopeByRole($query, $role)
-    {
-        if (in_array($role, ['admin', 'user'])) {
-            $query->where('role', $role);
-        }
     }
 }
