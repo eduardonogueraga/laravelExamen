@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Http\ViewComposers\UserFieldComposer;
 use App\Profession;
 use App\Skill;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
