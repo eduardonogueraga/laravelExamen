@@ -28,7 +28,7 @@ abstract class QueryFilter
 
     public function applyFliters($query, $name, $value)
     {
-        $method = 'filterBy' . Str::studly($name);
+        $method = Str::studly($name);
 
         if (method_exists($this, $method)) {
             $this->$method($query, $value);
