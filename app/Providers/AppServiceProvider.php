@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Http\ViewComposers\UserFieldComposer;
 use App\Profession;
 use App\Skill;
+use App\Sortable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Sortable::class, function ($app) {
+            return new Sortable(request()->url());
+        });
     }
 }
