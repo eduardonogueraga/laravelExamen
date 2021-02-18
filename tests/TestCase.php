@@ -11,7 +11,7 @@ abstract class TestCase extends BaseTestCase
 
     protected $defaultData;
 
-    public function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
         $this->addTestResponseMacros();
@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
         $this->enableQueryLog();
     }
 
-    public function tearDown()
+    protected function tearDown() : void
     {
         $this->flushQueryLog();
         parent::tearDown();
