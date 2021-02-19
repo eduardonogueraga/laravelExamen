@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Profession;
-use App\Skill;
-use App\Sortable;
-use App\User;
-use App\UserFilter;
-use Illuminate\Http\Request;
+use App\Http\Requests\{CreateUserRequest, UpdateUserRequest};
+use App\{Profession, Skill, Sortable, User, UserFilter};
 
 class UserController extends Controller
 {
-    public function index(UserFilter $userFilter, Sortable $sortable)
+    public function index(Sortable $sortable)
     {
         $users = User::query()
             ->with('team', 'skills', 'profile.profession')
@@ -25,12 +19,11 @@ class UserController extends Controller
                     $query->doesntHave('team');
                 }
             })
-            ->filterBy($userFilter, request()->only(['state', 'role', 'search', 'skills', 'from', 'to', 'order']))
+            ->applyFilters()
             ->orderByDesc('created_at')
             ->paginate();
 
-        $users->appends($userFilter->valid());
-        $sortable->appends($userFilter->valid());
+        $sortable->appends($users->parameters());
 
         return view('users.index', [
             'users' => $users,
