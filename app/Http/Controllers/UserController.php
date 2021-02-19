@@ -30,7 +30,8 @@ class UserController extends Controller
             ->paginate();
 
         $users->appends($userFilter->valid());
-        $sortable->appends($userFilter->valid());
+
+        $sortable->setCurrentorder(request('order'), request('direction'));
 
         return view('users.index', [
             'users' => $users,
