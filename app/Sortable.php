@@ -9,16 +9,11 @@ class Sortable
     protected $currentColumn;
     protected $currentDirection;
     protected $currentUrl;
+    protected $query = [];
 
     public function __construct($currentUrl)
     {
         $this->currentUrl = $currentUrl;
-    }
-
-    public function setCurrentorder($column, $direction = 'asc')
-    {
-        $this->currentColumn = $column;
-        $this->currentDirection = $direction;
     }
 
     public function url($column)
@@ -31,12 +26,12 @@ class Sortable
 
     protected function buildSortableUrl($column, $direction = 'asc')
     {
-        return $this->currentUrl . '?' . Arr::query(['order' => $column, 'direction' => $direction]);
+        return $this->currentUrl . '?' . Arr::query(array_merge($this->query, ['order' => $column, 'direction' => $direction]));
     }
 
     protected function isSortingBy($column, $direction)
     {
-        return $this->currentColumn == $column && $this->currentDirection == $direction;
+        return Arr::get($this->query, 'order') == $column && Arr::get($this->query, 'direction', 'asc') == $direction;
     }
 
     public function classes($column)
@@ -50,6 +45,11 @@ class Sortable
         }
 
         return 'link-sortable';
+    }
+
+    public function appends(array $query)
+    {
+        $this->query = $query;
     }
 
 }
