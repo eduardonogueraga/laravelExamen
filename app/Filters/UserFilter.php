@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Login;
 use App\Sortable;
 use App\Rules\SortableColumn;
 use Illuminate\Support\Carbon;
@@ -13,6 +14,7 @@ class UserFilter extends QueryFilter
 
     protected $aliasses = [
         'date' => 'created_at',
+        'login' => 'last_login_at',
     ];
 
     public function getColumnName($alias)
@@ -29,7 +31,7 @@ class UserFilter extends QueryFilter
             'skills' => 'array|exists:skills,id',
             'from' => 'date_format:d/m/Y',
             'to' => 'date_format:d/m/Y',
-            'order' => [new SortableColumn(['first_name', 'email', 'date'])],
+            'order' => [new SortableColumn(['first_name', 'email', 'date', 'login'])],
         ];
     }
 
