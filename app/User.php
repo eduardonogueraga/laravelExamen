@@ -18,6 +18,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'active' => 'bool',
+        'last_login_at' => 'datetime',
     ];
 
     /**
@@ -49,11 +50,6 @@ class User extends Authenticatable
     public function team()
     {
         return $this->belongsTo(Team::class)->withDefault();
-    }
-
-    public function lastLogin()
-    {
-        return $this->hasOne(Login::class)->orderByDesc('created_at');
     }
 
     public function setStateAttribute($value)
