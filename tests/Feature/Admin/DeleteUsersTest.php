@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Skill;
 use App\User;
 use App\UserProfile;
 use Tests\TestCase;
@@ -29,12 +30,17 @@ class DeleteUsersTest extends TestCase
     {
         $user = factory(User::class)->create();
 
+        $user->skills()->attach(factory(Skill::class)->create());
+
         $this->patch("usuarios/{$user->id}/papelera")
             ->assertRedirect('usuarios');
 
         //opción 1
         $this->assertSoftDeleted('users', [
             'id' => $user->id,
+        ]);
+        $this->assertSoftDeleted('skill_user', [
+            'user_id' => $user->id,
         ]);
         $this->assertSoftDeleted('user_profiles', [
             'user_id' => $user->id,
@@ -75,4 +81,5 @@ class DeleteUsersTest extends TestCase
             'deleted_at' => null,
         ]);
     }
+
 }

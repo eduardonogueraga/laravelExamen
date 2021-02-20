@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -67,5 +68,18 @@ class User extends Authenticatable
     public function getNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function delete()
+    {
+        DB::transaction(function () {
+            if (parent::delete()) {
+                $this->profile()->delete();
+
+                DB::table('skill_user')
+                    ->where('user_id', $this->id)
+                    ->update(['deleted_at' => now()]);
+            }
+        });
     }
 }

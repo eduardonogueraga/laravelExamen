@@ -9,6 +9,7 @@ use App\Skill;
 use App\Sortable;
 use App\User;
 use App\UserFilter;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -86,9 +87,6 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    /**
-     * @return array
-     */
     public function form($view, User $user)
     {
         return view($view, [
