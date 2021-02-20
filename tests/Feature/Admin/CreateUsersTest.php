@@ -322,5 +322,4 @@ class CreateUsersTest extends TestCase
 
         $this->assertDatabaseEmpty('users');
     }
-
 }

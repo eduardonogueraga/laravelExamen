@@ -53,11 +53,10 @@ class Sortable
 
     public static function info($order)
     {
-        if (Str::endsWith($order, '-desc')){
-            return [Str::substr($order,0,-5), 'desc'];
+        if (Str::endsWith($order, '-desc')) {
+            return [Str::substr($order, 0, -5), 'desc'];
         } else {
             return [$order, 'asc'];
         }
     }
-
 }

@@ -88,7 +88,6 @@ class FilterUsersTest extends TestCase
             ->contains($fullendDev)
             ->notContains($backendDev)
             ->notContains($frontendDev);
-
     }
 
     /** @test */
@@ -144,5 +143,4 @@ class FilterUsersTest extends TestCase
             ->notContains($newestUser)
             ->notContains($newUser);
     }
-
 }

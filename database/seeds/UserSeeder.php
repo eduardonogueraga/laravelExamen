@@ -1,6 +1,10 @@
 <?php
 
-use App\{User, Profession, Skill, Team, UserProfile};
+use App\User;
+use App\Profession;
+use App\Skill;
+use App\Team;
+use App\UserProfile;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -15,7 +19,7 @@ class UserSeeder extends Seeder
 
         $this->createAdmin();
 
-        foreach (range(1,999) as $i) {
+        foreach (range(1, 999) as $i) {
             $this->createRandomUser();
         }
     }
@@ -52,8 +56,8 @@ class UserSeeder extends Seeder
     {
         $user = factory(User::class)->create([
             'team_id' => rand(0, 2) ? null : $this->teams->random()->id,
-            'active' => rand(0,4) ? true : false,
-            'created_at' => now()->subDays(rand(1,90)),
+            'active' => rand(0, 4) ? true : false,
+            'created_at' => now()->subDays(rand(1, 90)),
         ]);
 
         $user->skills()->attach($this->skills->random(rand(0, 7)));
@@ -62,7 +66,7 @@ class UserSeeder extends Seeder
             'profession_id' => rand(0, 2) ? $this->professions->random()->id : null,
         ]);
 
-        factory(\App\Login::class)->times(rand(1,10))->create([
+        factory(\App\Login::class)->times(rand(1, 10))->create([
             'user_id' => $user->id,
         ]);
     }

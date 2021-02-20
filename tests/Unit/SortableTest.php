@@ -78,5 +78,4 @@ class SortableTest extends TestCase
         $this->assertSame(['email', 'asc'], Sortable::info('email'));
         $this->assertSame(['email', 'desc'], Sortable::info('email-desc'));
     }
-
 }

@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 
 class UserFilter extends QueryFilter
 {
-
     protected $aliasses = [
         'date' => 'created_at',
         'login' => 'last_login_at',
@@ -56,7 +55,7 @@ class UserFilter extends QueryFilter
             ->whereColumn('s.user_id', 'users.id')
             ->whereIn('skill_id', $skills);
 
-       $query->whereQuery($subquery, count($skills));
+        $query->whereQuery($subquery, count($skills));
     }
 
     public function from($query, $date)

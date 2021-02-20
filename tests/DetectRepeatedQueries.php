@@ -26,7 +26,9 @@ trait DetectRepeatedQueries
 
         foreach ($selects as $select => $amount) {
             $this->assertEquals(
-                1, $amount, "The folowing SELECT was executed $amount times:\n\n $select"
+                1,
+                $amount,
+                "The folowing SELECT was executed $amount times:\n\n $select"
             );
         }
     }
@@ -36,4 +38,3 @@ trait DetectRepeatedQueries
         DB::flushQueryLog();
     }
 }
-

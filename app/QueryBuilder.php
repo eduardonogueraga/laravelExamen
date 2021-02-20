@@ -21,7 +21,7 @@ class QueryBuilder extends Builder
 
     public function onlyTrashedIf($value)
     {
-        if($value) {
+        if ($value) {
             $this->onlyTrashed();
         }
 

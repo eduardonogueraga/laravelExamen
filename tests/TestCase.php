@@ -40,5 +40,4 @@ abstract class TestCase extends BaseTestCase
             return new TestCollectionData($this->viewData($var));
         });
     }
-
 }

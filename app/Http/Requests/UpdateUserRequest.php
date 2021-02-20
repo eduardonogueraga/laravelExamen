@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\{Role, User};
+use App\Role;
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -73,6 +74,5 @@ class UpdateUserRequest extends FormRequest
         ]);
 
         $user->skills()->sync($this->skills ?: []);
-
     }
 }

@@ -2,7 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\{User, Login};
+use App\User;
+use App\Login;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -51,5 +52,4 @@ class UserTest extends TestCase
 
         //$this->>assertTrue($users->firstWhere('first_name', 'Joel')->lastLogin->created_at->eq('2020-09-18 12:31:00'));
     }
-
 }

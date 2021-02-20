@@ -2,7 +2,8 @@
 
 namespace Tests\Feature\Admin;
 
-use App\{User, Team};
+use App\User;
+use App\Team;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -165,5 +166,4 @@ class SearchUsersTest extends TestCase
             ->notContains($joel)
             ->notContains($ellie);
     }
-
 }

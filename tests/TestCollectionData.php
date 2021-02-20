@@ -12,8 +12,7 @@ class TestCollectionData
 
     public function __construct($collection)
     {
-        if ( ! $collection instanceof Collection && ! $collection instanceof AbstractPaginator)
-        {
+        if (! $collection instanceof Collection && ! $collection instanceof AbstractPaginator) {
             PHPUnit::fail('The data is not a collection');
         }
         $this->collection = $collection;
@@ -33,4 +32,3 @@ class TestCollectionData
         return $this;
     }
 }
-

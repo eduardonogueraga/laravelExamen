@@ -2,8 +2,6 @@
 
 namespace App;
 
-
-
 class UserQuery extends QueryBuilder
 {
     public function findByEmail($email)
