@@ -1,10 +1,12 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\User;
 use App\Profession;
 use App\Skill;
 use App\Team;
-use App\UserProfile;
+use App\Login;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -54,7 +56,7 @@ class UserSeeder extends Seeder
 
     public function createRandomUser()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'team_id' => rand(0, 2) ? null : $this->teams->random()->id,
             'active' => rand(0, 4) ? true : false,
             'created_at' => now()->subDays(rand(1, 90)),
@@ -66,7 +68,7 @@ class UserSeeder extends Seeder
             'profession_id' => rand(0, 2) ? $this->professions->random()->id : null,
         ]);
 
-        factory(\App\Login::class)->times(rand(1, 10))->create([
+        Login::factory()->times(rand(1, 10))->create([
             'user_id' => $user->id,
         ]);
     }

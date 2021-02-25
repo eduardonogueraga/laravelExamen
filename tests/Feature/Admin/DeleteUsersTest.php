@@ -17,7 +17,7 @@ class DeleteUsersTest extends TestCase
     /*function it_deletes_a_user()
     {
         $this->withoutExceptionHandling();
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->delete('/usuarios/'.$user->id)
             ->assertRedirect('/usuarios');
@@ -28,9 +28,9 @@ class DeleteUsersTest extends TestCase
     /** @test */
     function it_sends_a_user_to_the_trash()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $user->skills()->attach(factory(Skill::class)->create());
+        $user->skills()->attach(Skill::factory()->create());
 
         $this->patch("usuarios/{$user->id}/papelera")
             ->assertRedirect('usuarios');
@@ -54,7 +54,7 @@ class DeleteUsersTest extends TestCase
     /** @test */
     function it_completely_deletes_a_user()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'deleted_at' => now()
         ]);
 
@@ -69,7 +69,7 @@ class DeleteUsersTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'deleted_at' => null
         ]);
 

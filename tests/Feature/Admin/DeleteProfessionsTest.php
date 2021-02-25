@@ -15,7 +15,7 @@ class DeleteProfessionsTest extends TestCase
     /** @test */
     function it_deletes_a_profession()
     {
-        $profession = factory(Profession::class)->create();
+        $profession = Profession::factory()->create();
 
         $response = $this->delete("/profesiones/{$profession->id}");
 
@@ -29,8 +29,8 @@ class DeleteProfessionsTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $user = factory(User::class)->create();
-        $profession = factory(Profession::class)->create();
+        $user = User::factory()->create();
+        $profession = Profession::factory()->create();
 
         $user->profile()->update([
             'profession_id' => $profession->id
