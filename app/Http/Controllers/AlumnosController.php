@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Alumno;
+use App\Curso;
+use App\Http\Requests\CreateAlumnoRequest;
+use App\Http\Requests\UpdateAlumnoRequest;
 use Illuminate\Http\Request;
 
 class AlumnosController extends Controller
@@ -20,59 +23,38 @@ class AlumnosController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function create(Alumno $alumno)
     {
-        //
+       return view('alumnos.create', [
+          'cursos' => Curso::all(),
+           'alumno' => $alumno
+       ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(CreateAlumnoRequest $request)
     {
-        //
+       $request->createAlumno();
+
+       return redirect()->route('alumnos.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Alumno $alumno
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Alumno $alumno)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Alumno $alumno
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Alumno $alumno)
     {
-        //
+        return view('alumnos.edit', [
+            'cursos' => Curso::all(),
+            'alumno' => $alumno
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Alumno $alumno
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Alumno $alumno)
+
+    public function update(UpdateAlumnoRequest $request, Alumno $alumno)
     {
-        //
+        $request->updateAlumno($alumno);
+
+        return redirect()->route('alumnos.index');
     }
 
     /**

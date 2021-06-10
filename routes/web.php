@@ -17,6 +17,12 @@ Route::get('/', function () {
 
 Route::get('/alumnos', 'AlumnosController@index')->name('alumnos.index');
 
+Route::get('/alumnos/crear', 'AlumnosController@create')->name('alumnos.create');
+Route::post('/alumnos', 'AlumnosController@store')->name('alumnos.store');
+Route::get('/alumnos/{alumno}/editar', 'AlumnosController@edit')->name('alumnos.edit');
+Route::put('/alumnos/{alumno}', 'AlumnosController@update')->name('alumnos.update');
+
+
 
 Route::get('/usuarios', 'UserController@index')->name('users.index');
 

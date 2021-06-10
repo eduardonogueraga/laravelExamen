@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between align-items-end mb-3">
         <h1 class="pb-1">{{trans('alumnos.title.index')}}</h1>
         <p>
-            <a href="" class="btn btn-primary">Nuevo alumno</a>
+            <a href="{{route('alumnos.create')}}" class="btn btn-primary">Nuevo alumno</a>
         </p>
     </div>
 

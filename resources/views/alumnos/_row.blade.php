@@ -9,8 +9,7 @@
 
     <td class="text-right">
 
-        <a href="" class="btn btn-outline-secondary btn-sm"><span class="oi oi-eye"></span></a>
-        <a href="" class="btn btn-outline-secondary btn-sm"><span class="oi oi-pencil"></span></a>
+        <a href="{{route('alumnos.edit', $alumno)}}" class="btn btn-outline-secondary btn-sm"><span class="oi oi-pencil"></span></a>
 
     </td>
 </tr>
