@@ -15,6 +15,7 @@ class AlumnosController extends Controller
     {
         $alumnos = Alumno::query()
             ->with('matricula')
+            ->applyFilters()
             ->orderBy('nombre')
             ->paginate();
 

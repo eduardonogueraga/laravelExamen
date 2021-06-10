@@ -16,6 +16,11 @@ class Alumno extends Model
         return $this->hasOne(Matricula::class);
     }
 
+    public function newEloquentBuilder($query)
+    {
+        return new AlumnoQuery($query);
+    }
+
 
 
 }

@@ -10,7 +10,7 @@
         </p>
     </div>
 
-{{--    @includeWhen($view=='index','alumnos._filters')--}}
+    @include('alumnos._filters')
 
     @if ($alumnos->isNotEmpty())
 
