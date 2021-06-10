@@ -29,9 +29,7 @@
         <select name="curso" id="field" class="select-field">
             <option value="" selected disabled hidden>Seleccione un curso</option>
             @foreach($cursos as $value)
-
-                <option value="{{ $value->id }}" >{{$value->curso .' '. $value->nivel }}</option>
-
+                <option value="{{ $value->id }}" {{(old('curso', optional($alumno->matricula)->curso_id) == $value->id ) ? ' selected' : '' }}>{{$value->curso .' '. $value->nivel }}</option>
             @endforeach
         </select>
     </div>
