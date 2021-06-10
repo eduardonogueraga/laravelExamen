@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 
 class AlumnosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $alumnos = Alumno::query()
+            ->with('matricula')
+            ->orderBy('nombre')
+            ->paginate();
+
+        return view('alumnos.index', [
+           'alumnos' => $alumnos,
+        ]);
     }
 
     /**
